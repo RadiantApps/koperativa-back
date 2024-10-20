@@ -34,6 +34,7 @@ const uploadMiddlewareBlogDetails = (req, res, next) => {
       "image/png",
       "image/svg+xml",
       "image/gif",
+      "video/mp4",
     ];
 
     const validateFile = (file) => {

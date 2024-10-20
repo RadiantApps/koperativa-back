@@ -19,7 +19,8 @@ const JobsRoute = require("./route/jobs.route");
 const CommentStaffRoute = require("./route/commentStaff.route.js");
 const BlogRoute = require("./route/blog.route.js");
 const BlogDetailsRoute = require("./route/blog_details.route.js");
-
+const AboutRoute = require("./route/about.route.js");
+const BannerRoute = require("./route/banner.route.js");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -58,6 +59,9 @@ app.use("/api/jobs", JobsRoute);
 app.use("/api/commentStaff", CommentStaffRoute);
 app.use("/api/blog", BlogRoute);
 app.use("/api/blogDetails", BlogDetailsRoute);
+app.use("/api/about", AboutRoute);
+app.use("/api/banner", BannerRoute);
+
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
