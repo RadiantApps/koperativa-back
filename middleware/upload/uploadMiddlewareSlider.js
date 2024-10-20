@@ -3,8 +3,7 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const uploadDir = "uploads/portfolio";
-
+    const uploadDir = "uploads/slider";
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }
@@ -19,7 +18,7 @@ const storage = multer.diskStorage({
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
 
-const uploadMiddleware = (req, res, next) => {
+const uploadMiddlewareSlider = (req, res, next) => {
   upload.single("file")(req, res, async (err) => {
     if (err) {
       return res.status(400).json({ error: err.message });
@@ -31,7 +30,7 @@ const uploadMiddleware = (req, res, next) => {
       "image/png",
       "image/svg+xml",
       "image/gif",
-      "video/mp4",
+      "video/mp4", // Allow mp4 videos
     ];
 
     if (file) {
@@ -49,4 +48,4 @@ const uploadMiddleware = (req, res, next) => {
   });
 };
 
-module.exports = uploadMiddleware;
+module.exports = uploadMiddlewareSlider;
