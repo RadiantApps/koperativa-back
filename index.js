@@ -21,6 +21,8 @@ const BlogRoute = require("./route/blog.route.js");
 const BlogDetailsRoute = require("./route/blog_details.route.js");
 const AboutRoute = require("./route/about.route.js");
 const BannerRoute = require("./route/banner.route.js");
+const NextPostRoute = require("./route/nextPost.route.js");
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -61,6 +63,7 @@ app.use("/api/blog", BlogRoute);
 app.use("/api/blogDetails", BlogDetailsRoute);
 app.use("/api/about", AboutRoute);
 app.use("/api/banner", BannerRoute);
+app.use("/api/nextpost", NextPostRoute);
 
 const port = 5000;
 
