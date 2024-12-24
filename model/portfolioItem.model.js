@@ -16,6 +16,20 @@ const createPortfolioItem = async (
   return result;
 };
 
+const updatePortfolioItem = async (
+  portfolioId,
+  description,
+  title,
+  subtitle
+) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3006]),
+    params: [description, title, subtitle, portfolioId],
+  });
+  if (!result.status) throw result;
+  return result;
+};
+
 const getPortfolioItemById = async (id) => {
   const result = await executeQuery({
     query: getSQLQuery([1007]),
@@ -98,6 +112,6 @@ module.exports = {
   getContetPortfolioItemById,
   updateContentOrder,
   getPortfolioItemById,
-
+  updatePortfolioItem,
   deleteDeliverables,
 };

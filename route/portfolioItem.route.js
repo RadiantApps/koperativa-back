@@ -16,6 +16,12 @@ router.post(
   PortfolioItemController.createPortfolioItem
 );
 
+router.put(
+  "/updatePortfolioItem",
+  authMiddleware,
+  PortfolioItemController.updatePortfolioContent
+);
+
 router.post(
   "/createDeliverables",
   authMiddleware,
