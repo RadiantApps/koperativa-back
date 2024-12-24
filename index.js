@@ -22,7 +22,7 @@ const BlogDetailsRoute = require("./route/blog_details.route.js");
 const AboutRoute = require("./route/about.route.js");
 const BannerRoute = require("./route/banner.route.js");
 const NextPostRoute = require("./route/nextPost.route.js");
-
+const PartnerLogoRoute = require("./route/partnerLogo.route.js");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -64,7 +64,7 @@ app.use("/api/blogDetails", BlogDetailsRoute);
 app.use("/api/about", AboutRoute);
 app.use("/api/banner", BannerRoute);
 app.use("/api/nextpost", NextPostRoute);
-
+app.use("/api/partner", PartnerLogoRoute);
 const port = 5000;
 
 const checkDatabaseConnection = async () => {

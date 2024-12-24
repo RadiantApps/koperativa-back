@@ -27,6 +27,22 @@ exports.createPortfolioItem = async (req, res) => {
   }
 };
 
+exports.updatePortfolioContent = async (req, res) => {
+  const { portfolioId, description, title, subtitle } = req.body;
+
+  try {
+    const response = await portfolioItemModel.updatePortfolioItem(
+      portfolioId,
+      description,
+      title,
+      subtitle
+    );
+    return res.status(201).json({ message: "Portfolio updated successfull" });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating portfolio item", error });
+  }
+};
+
 exports.createDeliverables = async (req, res) => {
   const { portfolioId, name } = req.body;
 
