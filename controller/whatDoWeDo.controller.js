@@ -4,7 +4,7 @@ const { validationWhatDoWeDo } = require("../validation/whatwedo/whatwedo");
 exports.createWhatDoWeDo = async (req, res) => {
   const { title, description } = req.body;
   const { errors, isValid } = validationWhatDoWeDo(req.body);
-
+  console.log(isValid, errors);
   if (!isValid) {
     return res.status(404).json(errors);
   }

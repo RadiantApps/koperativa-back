@@ -1,6 +1,5 @@
 const Validator = require("validator");
 const isEmpty = require("../isEmpty");
-const { isValid } = require("date-fns");
 
 function validationWhatDoWeDo(data) {
   let errors = {};
@@ -18,7 +17,7 @@ function validationWhatDoWeDo(data) {
 
   return {
     errors,
-    isValid: isValid(errors),
+    isValid: isEmpty(errors),
   };
 }
 
