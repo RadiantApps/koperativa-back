@@ -28,6 +28,15 @@ const createPortfolio = async (title, photo) => {
   return result;
 };
 
+const updatePortfolio = async (id, title, photo) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3007]),
+    params: [title, photo, id],
+  });
+  if (!result.status) throw result;
+  return result;
+};
+
 const deleteProtfolioById = async (id) => {
   const data = await getPortfolioById(id);
   if (data) {
@@ -102,4 +111,5 @@ module.exports = {
   createPortfolio,
   deleteProtfolioById,
   getPortfolioDetails,
+  updatePortfolio,
 };

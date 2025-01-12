@@ -3,6 +3,7 @@ const router = express.Router();
 const PortfolioController = require("../controller/portfolio.controller");
 const { authMiddleware, checkRole } = require("../middleware/authMiddleware");
 const uploadMiddleware = require("../middleware/upload/uploadMiddleware");
+const updatePortfolioMiddleware = require("../middleware/upload/updatePortfolioMiddleware");
 
 router.get("/", PortfolioController.getPortfolios);
 router.get("/:id", PortfolioController.getPortfolio);
@@ -19,6 +20,7 @@ router.put(
   "/:id",
   authMiddleware,
   checkRole("admin", "user"),
+  updatePortfolioMiddleware,
   PortfolioController.updatePortfolio
 );
 
