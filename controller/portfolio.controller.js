@@ -39,7 +39,18 @@ exports.createPortfolio = async (req, res) => {
   }
 };
 
-exports.updatePortfolio = async (req, res) => {};
+exports.updatePortfolio = async (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  const photo = req.file && req.file.path;
+  try {
+    const update = await portfolioModel.updatePortfolio(id, title, photo);
+    return res.status(201).json({ message: "Portfolio updated successfull" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error updating portfolio", error });
+  }
+};
 
 exports.deletePortfolio = async (req, res) => {
   const { id } = req.params;
