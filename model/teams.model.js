@@ -28,8 +28,17 @@ const deleteTeams = async (id) => {
   return result;
 };
 
+const updateTeams = async (name, surname, title, subtitle, photo, id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3010]),
+    params: [name, surname, title, subtitle, photo, id],
+  });
+  if (!result?.status) throw result;
+  return result;
+};
 module.exports = {
   getTeams,
   createTeams,
   deleteTeams,
+  updateTeams,
 };

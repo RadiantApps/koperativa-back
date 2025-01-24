@@ -39,6 +39,29 @@ exports.createTeams = async (req, res) => {
   }
 };
 
+exports.updateTeams = async (req, res) => {
+  const { name, surname, title, subtitle } = req.body;
+  const photo = req.file ? req.file.path : null;
+  const { id } = req.params;
+
+  try {
+    const createResponse = await TeamsModel.updateTeams(
+      name,
+      surname,
+      title,
+      subtitle,
+      photo,
+      id
+    );
+    res.status(201).json({
+      success: true,
+      message: "Teams updated successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error updating teams", error });
+  }
+};
 exports.deleteTeams = async (req, res) => {
   const { id } = req.params;
   try {

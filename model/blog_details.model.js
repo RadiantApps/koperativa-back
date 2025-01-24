@@ -26,8 +26,19 @@ const deleteBlogDetails = async (id) => {
   return result;
 };
 
+const updateBlogDetails = async (type, data, blogId) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3011]),
+    params: [type, data, blogId],
+  });
+
+  if (!result.status) throw result;
+  return result;
+};
+
 module.exports = {
   getBlogDetailsContent,
   createBlogDetails,
   deleteBlogDetails,
+  updateBlogDetails,
 };

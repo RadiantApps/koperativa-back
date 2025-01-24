@@ -36,6 +36,27 @@ exports.creteAwards = async (req, res) => {
   }
 };
 
+exports.updateAward = async (req, res) => {
+  try {
+    const { organization, project, award, year } = req.body;
+    const { id } = req.params;
+    const updateAwardResponse = await AwardModel.updateAward(
+      organization,
+      project,
+      award,
+      year,
+      id
+    );
+    res.status(201).json({
+      success: true,
+      message: "Award updated successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error updated award", error });
+  }
+};
+
 exports.deleteAwards = async (req, res) => {
   const { id } = req.params;
   try {

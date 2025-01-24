@@ -204,6 +204,54 @@ exports.createPortfolioContent = async (req, res) => {
   }
 };
 
+exports.updatePortfolio = async (req, res) => {
+  try {
+    let imageUrl1 = null;
+    let imageUrl2 = null;
+    const fullImageIframeLink = req.body.iframeLink;
+    // Handle file uploads
+    if (req.files) {
+      imageUrl1 = req.files.file ? req.files.file[0].path : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+    }
+    const { type, content } = req.body;
+    const portfolioId = req.params.id;
+    const firstLink = req.body.firstIframeLink;
+    const secondLink = req.body.secondIframeLink;
+
+    let contentData;
+    if (type === "image") {
+      contentData = {
+        imageUrl: fullImageIframeLink ? { fullImageIframeLink } : imageUrl1,
+      };
+    } else if (type === "text") {
+      contentData = { text: content };
+    } else if (type === "twoImages") {
+      contentData = {
+        imageUrls: [
+          firstLink ? { firstLink } : imageUrl1,
+          secondLink ? { secondLink } : imageUrl2,
+        ],
+      };
+    }
+    const createResponse = await portfolioItemModel.updatePortfolioContent(
+      type,
+      JSON.stringify(contentData),
+      portfolioId
+    );
+
+    // Respond with success
+    return res.status(201).json({
+      message: "Content item updated successfully",
+      data: createResponse,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Error updating portfolio item", error });
+  }
+};
 exports.getPortfolioContentByPortfilioId = async (req, res) => {
   const { id } = req.params;
   try {

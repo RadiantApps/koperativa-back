@@ -77,7 +77,6 @@ const getPortfolioDetails = async (id) => {
       portfolio.item_icon = row.item_icon;
     }
 
-    // Add portfolio content if it hasn't been added yet
     if (row.content_id && !contentIds.has(row.content_id)) {
       portfolioContent.push({
         id: row.content_id,
@@ -88,7 +87,6 @@ const getPortfolioDetails = async (id) => {
       contentIds.add(row.content_id);
     }
 
-    // Add portfolio deliverable if it hasn't been added yet
     if (row.deliverable_id && !deliverableIds.has(row.deliverable_id)) {
       portfolioDeliverables.push({
         id: row.deliverable_id,
@@ -105,6 +103,15 @@ const getPortfolioDetails = async (id) => {
   return portfolio;
 };
 
+const updatePortfolioOrder = async (id, order) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3012]),
+    params: [order, id],
+  });
+  if (!result.status) throw result;
+  return result;
+};
+
 module.exports = {
   getAllPortfolios,
   getPortfolioById,
@@ -112,4 +119,5 @@ module.exports = {
   deleteProtfolioById,
   getPortfolioDetails,
   updatePortfolio,
+  updatePortfolioOrder,
 };
