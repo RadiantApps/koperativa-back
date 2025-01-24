@@ -103,6 +103,15 @@ const createPortfolioContent = async (portfolioId, type, data, order) => {
   return result;
 };
 
+const updatePortfolioContent = async (type, data, portfolioId) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3008]),
+    params: [type, data, portfolioId],
+  });
+  if (!result.status) throw result;
+  return result;
+};
+
 module.exports = {
   createPortfolioItem,
   createDeliverables,
@@ -114,4 +123,5 @@ module.exports = {
   getPortfolioItemById,
   updatePortfolioItem,
   deleteDeliverables,
+  updatePortfolioContent,
 };

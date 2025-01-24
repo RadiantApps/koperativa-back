@@ -34,7 +34,7 @@ const uploadMiddlewareBlogDetails = (req, res, next) => {
       "image/png",
       "image/svg+xml",
       "image/gif",
-      "video/mp4",
+      "video/mp4", // Allow mp4 videos
     ];
 
     const validateFile = (file) => {
@@ -55,13 +55,6 @@ const uploadMiddlewareBlogDetails = (req, res, next) => {
     errorMessage = validateFile(secondFile);
     if (errorMessage) {
       return res.status(400).json({ error: errorMessage });
-    }
-    if (req.body.type !== "text") {
-      if (!file && !secondFile) {
-        return res
-          .status(400)
-          .json({ error: "Please upload at least one photo" });
-      }
     }
 
     next();

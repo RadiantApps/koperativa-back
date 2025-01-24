@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
 
 const uploadMiddlewareTeams = (req, res, next) => {
@@ -31,7 +30,7 @@ const uploadMiddlewareTeams = (req, res, next) => {
       "image/png",
       "image/svg+xml",
       "image/gif",
-      "video/mp4", // Allow mp4 videos
+      "video/mp4",
     ];
 
     if (file) {
@@ -41,8 +40,6 @@ const uploadMiddlewareTeams = (req, res, next) => {
           .status(400)
           .json({ error: `Invalid file type: ${file.originalname}` });
       }
-    } else {
-      return res.status(400).json({ error: "Please upload a photo" });
     }
 
     next();

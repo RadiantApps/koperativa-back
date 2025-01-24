@@ -24,6 +24,7 @@ router.put(
   PortfolioController.updatePortfolio
 );
 
+router.post("/updateOrder", authMiddleware, PortfolioController.updateOrder);
 router.delete(
   "/:id",
   authMiddleware,

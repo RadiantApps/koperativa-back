@@ -13,6 +13,13 @@ router.post(
   uploadMiddlewareBlogDetails,
   BlogDetailsController.createBlogDetailsContent
 );
+
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadMiddlewareBlogDetails,
+  BlogDetailsController.updateBlogDetailsContent
+);
 router.delete(
   "/:id",
   authMiddleware,

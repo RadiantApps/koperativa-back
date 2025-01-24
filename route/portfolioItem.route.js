@@ -53,6 +53,13 @@ router.post(
   PortfolioItemController.createPortfolioContent
 );
 
+router.put(
+  "/updatePortfolioContent/:id",
+  authMiddleware,
+  uploadMiddlewarePortfolioContent,
+  PortfolioItemController.updatePortfolio
+);
+
 router.get(
   "/getPortfolioContentByPortfilioId/:id",
   authMiddleware,
