@@ -29,8 +29,39 @@ const editContent = async (id, content) => {
   if (!result.status) throw result;
   return result?.data;
 };
+
+const getBannerHome = async () => {
+  const result = await executeQuery({
+    query: getSQLQuery([1027]),
+  });
+  if (!result.status) throw result;
+  return result?.data;
+};
+
+const createBannerHome = async (url) => {
+  const result = await executeQuery({
+    query: getSQLQuery([2021]),
+    params: [url],
+  });
+
+  if (!result.status) throw result;
+  return result?.data;
+};
+
+const deleteBannerHome = async (id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([4017]),
+    params: [id],
+  });
+
+  if (!result.status) throw result;
+  return result?.data;
+};
 module.exports = {
   createContent,
   getContent,
   editContent,
+  getBannerHome,
+  createBannerHome,
+  deleteBannerHome,
 };
