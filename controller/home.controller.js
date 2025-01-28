@@ -34,3 +34,38 @@ exports.editContent = async (req, res) => {
     res.status(500).json({ message: "Error editing home page", error });
   }
 };
+
+exports.getBannerHome = async (req, res) => {
+  try {
+    const result = await HomePage.getBannerHome();
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error getting banner", error });
+  }
+};
+
+exports.createBannerHome = async (req, res) => {
+  const photo = req.file.path;
+  try {
+    const response = await HomePage.createBannerHome(photo);
+    return res.status(201).json({ message: "Banner Home created succesfull" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error creating banner ", error });
+  }
+};
+
+exports.deleteBannerHome = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await HomePage.deleteBannerHome(id);
+    return res.status(201).json({ message: "Banner deleted succesfull" });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Error deleteing banner home", error });
+  }
+};
