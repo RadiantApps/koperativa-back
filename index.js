@@ -23,6 +23,8 @@ const AboutRoute = require("./route/about.route.js");
 const BannerRoute = require("./route/banner.route.js");
 const NextPostRoute = require("./route/nextPost.route.js");
 const PartnerLogoRoute = require("./route/partnerLogo.route.js");
+const shareRoute = require("./route/share.route.js");
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -65,7 +67,7 @@ app.use("/api/about", AboutRoute);
 app.use("/api/banner", BannerRoute);
 app.use("/api/nextpost", NextPostRoute);
 app.use("/api/partner", PartnerLogoRoute);
-app.use("/api/share", require("./route/share.route"));
+app.use("/api/share", shareRoute);
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
