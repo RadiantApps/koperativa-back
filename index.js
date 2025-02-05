@@ -65,6 +65,7 @@ app.use("/api/about", AboutRoute);
 app.use("/api/banner", BannerRoute);
 app.use("/api/nextpost", NextPostRoute);
 app.use("/api/partner", PartnerLogoRoute);
+app.use("/api/share", require("./route/share.route"));
 const port = 5000;
 
 const checkDatabaseConnection = async () => {

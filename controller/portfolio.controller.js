@@ -68,6 +68,7 @@ exports.deletePortfolio = async (req, res) => {
 
 exports.updateOrder = async (req, res) => {
   const { items } = req.body;
+
   const itemsArr = JSON.parse(items);
   try {
     const promises = itemsArr.map((item) =>
