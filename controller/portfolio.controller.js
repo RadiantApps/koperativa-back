@@ -1,7 +1,8 @@
 const portfolioModel = require("../model/portfolio.model");
 exports.getPortfolios = async (req, res) => {
+  const { id } = req.query;
   try {
-    const portfolios = await portfolioModel.getAllPortfolios();
+    const portfolios = await portfolioModel.getAllPortfolios(id);
     res.status(200).json(portfolios);
   } catch (error) {
     res.status(500).json({ message: "Error fetching portfolios", error });

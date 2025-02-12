@@ -1,11 +1,12 @@
 const { executeQuery } = require("../config/database");
 const { getSQLQuery } = require("../lib/getSQLQuery");
 const fs = require("fs").promises;
-const getAllPortfolios = async () => {
+const getAllPortfolios = async (categoryId) => {
+  const id = Number(categoryId) === 0 ? null : Number(categoryId);
   const result = await executeQuery({
-    query: getSQLQuery([1003]),
+    query: getSQLQuery([1032]),
+    params: [id, id],
   });
-
   if (!result?.status) throw result;
   return result.data;
 };
