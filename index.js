@@ -24,6 +24,8 @@ const BannerRoute = require("./route/banner.route.js");
 const NextPostRoute = require("./route/nextPost.route.js");
 const PartnerLogoRoute = require("./route/partnerLogo.route.js");
 const shareRoute = require("./route/share.route.js");
+const categoryWork = require("./route/categorywork.js");
+const portfoliomapCategory = require("./route/portfolioMapCategory.route.js");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -68,6 +70,8 @@ app.use("/api/banner", BannerRoute);
 app.use("/api/nextpost", NextPostRoute);
 app.use("/api/partner", PartnerLogoRoute);
 app.use("/api/share", shareRoute);
+app.use("/api/categorywork", categoryWork);
+app.use("/api/portfoliomapcategory", portfoliomapCategory);
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
@@ -78,6 +82,7 @@ const checkDatabaseConnection = async () => {
     process.exit(1);
   }
 };
+
 checkDatabaseConnection();
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
