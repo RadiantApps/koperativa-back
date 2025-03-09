@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
 
 const uploadMiddlewareBlog = (req, res, next) => {
@@ -40,8 +39,6 @@ const uploadMiddlewareBlog = (req, res, next) => {
           .status(400)
           .json({ error: `Invalid file type: ${file.originalname}` });
       }
-    } else {
-      return res.status(400).json({ error: "Please upload a photo" });
     }
 
     next();

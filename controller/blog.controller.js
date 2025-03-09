@@ -43,8 +43,26 @@ exports.createBlogs = async (req, res) => {
   }
 };
 
+exports.updateBlogs = async (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  const photo = req.file ? req.file.path : null;
+
+  try {
+    const createResponse = await BlogModel.updateBlogs(title, photo, id);
+    res.status(201).json({
+      success: true,
+      message: "Blog updated successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error updating blogs", error });
+  }
+};
+
 exports.deleteBlogs = async (req, res) => {
   const { id } = req.params;
+
   try {
     const response = await BlogModel.deleteBlogs(id);
     res.json({

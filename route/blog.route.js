@@ -5,6 +5,7 @@ const { authMiddleware } = require("../middleware/authMiddleware");
 const uploadMiddlewareBlog = require("../middleware/upload/uploadMiddlewareBlog");
 router.get("/", BlogController.getBlogs);
 router.get("/:id", BlogController.getBlgById);
+
 router.post(
   "/",
   authMiddleware,
@@ -12,6 +13,12 @@ router.post(
   BlogController.createBlogs
 );
 
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadMiddlewareBlog,
+  BlogController.updateBlogs
+);
 router.delete("/:id", authMiddleware, BlogController.deleteBlogs);
 
 module.exports = router;

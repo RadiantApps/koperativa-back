@@ -11,5 +11,12 @@ router.post(
   CommentController.createComment
 );
 
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadMiddlewarePartners,
+  CommentController.updateComment
+);
+
 router.delete("/:id", CommentController.deleteComment);
 module.exports = router;

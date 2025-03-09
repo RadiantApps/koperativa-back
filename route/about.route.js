@@ -31,6 +31,7 @@ router.post(
   AboutController.addPhoto
 );
 
+router.delete("/deleteVideo/:id", authMiddleware, AboutController.deletePhoto);
 router.put(
   "/updatePhoto/:id",
   authMiddleware,

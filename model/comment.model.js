@@ -20,6 +20,16 @@ const createComment = async (name, title, comment, photo) => {
   return result;
 };
 
+const updateComments = async (name, title, comment, photo, id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3013]),
+    params: [name, title, comment, photo, id],
+  });
+
+  if (!result?.status) throw result;
+  return result;
+};
+
 const deleteComment = async (id) => {
   const result = await executeQuery({
     query: getSQLQuery([4004]),
@@ -32,4 +42,5 @@ module.exports = {
   getComment,
   createComment,
   deleteComment,
+  updateComments,
 };

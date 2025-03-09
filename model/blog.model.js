@@ -28,6 +28,15 @@ const createBlogs = async (title, photo) => {
   return result;
 };
 
+const updateBlogs = async (title, photo, id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3014]),
+    params: [title, photo, id],
+  });
+  if (!result?.status) throw result;
+  return result;
+};
+
 const deleteBlogs = async (id) => {
   const result = await executeQuery({
     query: getSQLQuery([4009]),
@@ -42,4 +51,5 @@ module.exports = {
   deleteBlogs,
   createBlogs,
   getBlogs,
+  updateBlogs,
 };

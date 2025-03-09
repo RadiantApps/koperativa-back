@@ -99,3 +99,16 @@ exports.updatePhoto = async (req, res) => {
     res.status(500).json({ message: "Error updating photo", error });
   }
 };
+
+exports.deletePhoto = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const response = await AboutModel.deletePhoto(id);
+    res.json({
+      success: true,
+      message: "Photo deleted successfull",
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting photo", error });
+  }
+};
