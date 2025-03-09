@@ -41,8 +41,6 @@ const uploadMiddlewarePartners = (req, res, next) => {
           .status(400)
           .json({ error: `Invalid file type: ${file.originalname}` });
       }
-    } else {
-      return res.status(400).json({ error: "Please upload a photo" });
     }
 
     next();

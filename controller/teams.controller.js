@@ -39,6 +39,25 @@ exports.createTeams = async (req, res) => {
   }
 };
 
+exports.updateOrder = async (req, res) => {
+  const { items } = req.body;
+
+  const itemsArr = JSON.parse(items);
+  try {
+    const promises = itemsArr.map((item) =>
+      TeamsModel.updateTeamsOrder(item.id, item.order)
+    );
+    await Promise.all(promises);
+
+    return res.status(200).json({
+      message: "Teams items updated successfully",
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error updating Teams order", error });
+  }
+};
 exports.updateTeams = async (req, res) => {
   const { name, surname, title, subtitle } = req.body;
   const photo = req.file ? req.file.path : null;

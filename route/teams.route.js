@@ -18,5 +18,7 @@ router.put(
   uploadMiddlewareTeams,
   TeamsController.updateTeams
 );
+
+router.post("/updateOrders", authMiddleware, TeamsController.updateOrder);
 router.delete("/:id", authMiddleware, TeamsController.deleteTeams);
 module.exports = router;

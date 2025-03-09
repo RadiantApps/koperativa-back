@@ -38,6 +38,29 @@ exports.createComment = async (req, res) => {
   }
 };
 
+exports.updateComment = async (req, res) => {
+  const { name, title, comment } = req.body;
+  const photo = req.file ? req.file.path : null;
+  const { id } = req.params;
+
+  try {
+    const createResponse = await CommentModel.updateComments(
+      name,
+      title,
+      comment,
+      photo,
+      id
+    );
+    res.status(201).json({
+      success: true,
+      message: "Comment updated successfull",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error updating comment", error });
+  }
+};
+
 exports.deleteComment = async (req, res) => {
   const { id } = req.params;
   try {

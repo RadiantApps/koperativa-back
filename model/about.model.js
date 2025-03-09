@@ -76,6 +76,15 @@ const updatePhoto = async (id, photo) => {
   if (!result.status) throw result;
   return result?.data;
 };
+
+const deletePhoto = async (id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([4020]),
+    params: [id],
+  });
+  if (!result.status) throw result;
+  return result?.data;
+};
 module.exports = {
   createContent,
   getContent,
@@ -85,4 +94,5 @@ module.exports = {
   deleteSlider,
   addPhoto,
   updatePhoto,
+  deletePhoto,
 };
