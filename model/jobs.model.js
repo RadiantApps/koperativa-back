@@ -18,10 +18,10 @@ const getJobsById = async (id) => {
   return result?.data[0];
 };
 
-const createJobs = async (title, city, job_type, description) => {
+const createJobs = async (title, city, job_type, description, photo) => {
   const result = await executeQuery({
     query: getSQLQuery([2011]),
-    params: [title, city, job_type, description],
+    params: [title, city, job_type, description, photo],
   });
   if (!result?.status) throw result;
   return result;

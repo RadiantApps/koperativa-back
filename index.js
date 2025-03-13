@@ -26,6 +26,7 @@ const PartnerLogoRoute = require("./route/partnerLogo.route.js");
 const shareRoute = require("./route/share.route.js");
 const categoryWork = require("./route/categorywork.js");
 const portfoliomapCategory = require("./route/portfolioMapCategory.route.js");
+const latestWorkRoute = require("./route/latestwork.route.js");
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -72,6 +73,7 @@ app.use("/api/partner", PartnerLogoRoute);
 app.use("/api/share", shareRoute);
 app.use("/api/categorywork", categoryWork);
 app.use("/api/portfoliomapcategory", portfoliomapCategory);
+app.use("/api/latestWork", latestWorkRoute);
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
