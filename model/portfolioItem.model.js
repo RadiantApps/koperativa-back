@@ -49,7 +49,6 @@ const createDeliverables = async (portfolioId, name, order) => {
 };
 
 const deleteDeliverables = async (id) => {
-  console.log(id);
   const result = await executeQuery({
     query: getSQLQuery([4014]),
     params: [id],

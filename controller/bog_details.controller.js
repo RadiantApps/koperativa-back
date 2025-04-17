@@ -85,7 +85,7 @@ exports.updateBlogDetailsContent = async (req, res) => {
     let imageUrl1 = null;
     let imageUrl2 = null;
     const fullImageIframeLink = req.body.iframeLink;
-    // Handle file uploads
+
     if (req.files) {
       imageUrl1 = req.files.file ? req.files.file[0].path : null;
       imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
@@ -116,7 +116,6 @@ exports.updateBlogDetailsContent = async (req, res) => {
       blogId
     );
 
-    // Respond with success
     return res.status(201).json({
       message: "Blog item updated successfully",
       data: createResponse,
@@ -126,5 +125,24 @@ exports.updateBlogDetailsContent = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Error updating blog details", error });
+  }
+};
+
+exports.updateOrder = async (req, res) => {
+  const { items } = req.body;
+  const itemsArr = JSON.parse(items);
+
+  try {
+    const promises = itemsArr.map((item) =>
+      BlogDetailsModel.updatetOrderItem(item.id, item.order)
+    );
+    await Promise.all(promises);
+
+    return res.status(200).json({
+      message: "Content items updated successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Error updating order", error });
   }
 };

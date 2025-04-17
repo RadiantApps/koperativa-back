@@ -13,7 +13,7 @@ router.post(
   uploadMiddlewareBlogDetails,
   BlogDetailsController.createBlogDetailsContent
 );
-
+router.put("/updateOrder", authMiddleware, BlogDetailsController.updateOrder);
 router.put(
   "/:id",
   authMiddleware,

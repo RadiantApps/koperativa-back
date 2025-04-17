@@ -31,7 +31,15 @@ const updateBlogDetails = async (type, data, blogId) => {
     query: getSQLQuery([3011]),
     params: [type, data, blogId],
   });
+  if (!result.status) throw result;
+  return result;
+};
 
+const updatetOrderItem = async (id, order) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3017]),
+    params: [order, id],
+  });
   if (!result.status) throw result;
   return result;
 };
@@ -41,4 +49,5 @@ module.exports = {
   createBlogDetails,
   deleteBlogDetails,
   updateBlogDetails,
+  updatetOrderItem,
 };
