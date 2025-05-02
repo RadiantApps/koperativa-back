@@ -27,7 +27,7 @@ const shareRoute = require("./route/share.route.js");
 const categoryWork = require("./route/categorywork.js");
 const portfoliomapCategory = require("./route/portfolioMapCategory.route.js");
 const latestWorkRoute = require("./route/latestwork.route.js");
-
+const ourstoryRoute = require("./route/ourstory.route.js");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
@@ -74,6 +74,8 @@ app.use("/api/share", shareRoute);
 app.use("/api/categorywork", categoryWork);
 app.use("/api/portfoliomapcategory", portfoliomapCategory);
 app.use("/api/latestWork", latestWorkRoute);
+app.use("/api/ourstory", ourstoryRoute);
+
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
