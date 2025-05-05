@@ -20,11 +20,12 @@ const updatePortfolioItem = async (
   portfolioId,
   description,
   title,
-  subtitle
+  subtitle,
+  photo
 ) => {
   const result = await executeQuery({
     query: getSQLQuery([3006]),
-    params: [description, title, subtitle, portfolioId],
+    params: [description, title, subtitle, photo, portfolioId],
   });
   if (!result.status) throw result;
   return result;
