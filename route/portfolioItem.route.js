@@ -19,6 +19,7 @@ router.post(
 router.put(
   "/updatePortfolioItem",
   authMiddleware,
+  uploadMiddleware,
   PortfolioItemController.updatePortfolioContent
 );
 

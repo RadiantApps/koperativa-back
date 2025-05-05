@@ -29,16 +29,19 @@ exports.createPortfolioItem = async (req, res) => {
 
 exports.updatePortfolioContent = async (req, res) => {
   const { portfolioId, description, title, subtitle } = req.body;
+  const photo = req.file.path;
 
   try {
     const response = await portfolioItemModel.updatePortfolioItem(
       portfolioId,
       description,
       title,
-      subtitle
+      subtitle,
+      photo
     );
     return res.status(201).json({ message: "Portfolio updated successfull" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Error updating portfolio item", error });
   }
 };
