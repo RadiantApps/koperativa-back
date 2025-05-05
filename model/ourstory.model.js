@@ -29,16 +29,25 @@ const deleteOurStory = async (id) => {
 
 const updatetOrderItem = async (id, order) => {
   const result = await executeQuery({
-    query: getSQLQuery([3017]),
+    query: getSQLQuery([3018]),
     params: [order, id],
   });
   if (!result.status) throw result;
   return result;
 };
 
+const updateOurStory = async (type, data, id) => {
+  const result = await executeQuery({
+    query: getSQLQuery([3019]),
+    params: [type, data, id],
+  });
+  if (!result.status) throw result;
+  return result;
+};
 module.exports = {
   getOurStory,
   createOurStory,
   deleteOurStory,
   updatetOrderItem,
+  updateOurStory,
 };

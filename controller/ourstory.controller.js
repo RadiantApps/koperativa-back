@@ -75,7 +75,7 @@ exports.deleteOurStory = async (req, res) => {
 exports.updateOrder = async (req, res) => {
   const { items } = req.body;
   const itemsArr = JSON.parse(items);
-
+  console.log(itemsArr);
   try {
     const promises = itemsArr.map((item) =>
       OurStoryModel.updatetOrderItem(item.id, item.order)
@@ -88,5 +88,55 @@ exports.updateOrder = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error updating order", error });
+  }
+};
+
+exports.updateOurStoryItem = async (req, res) => {
+  try {
+    let imageUrl1 = null;
+    let imageUrl2 = null;
+    const fullImageIframeLink = req.body.iframeLink;
+    // Handle file uploads
+    if (req.files) {
+      imageUrl1 = req.files.file ? req.files.file[0].path : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+    }
+    const { id } = req.params;
+    const { type, content } = req.body;
+    const firstLink = req.body.firstIframeLink;
+    const secondLink = req.body.secondIframeLink;
+
+    let contentData;
+    if (type === "image") {
+      contentData = {
+        imageUrl: fullImageIframeLink ? { fullImageIframeLink } : imageUrl1,
+      };
+    } else if (type === "text") {
+      contentData = { text: content };
+    } else if (type === "twoImages") {
+      contentData = {
+        imageUrls: [
+          firstLink ? { firstLink } : imageUrl1,
+          secondLink ? { secondLink } : imageUrl2,
+        ],
+      };
+    }
+
+    const createResponse = await OurStoryModel.updateOurStory(
+      type,
+      JSON.stringify(contentData),
+      id
+    );
+
+    // Respond with success
+    return res.status(201).json({
+      message: "Content item updated successfully",
+      data: createResponse,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ message: "Error updating portfolio item", error });
   }
 };
