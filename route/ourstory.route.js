@@ -7,6 +7,12 @@ const uploadOurStoryMiddleware = require("../middleware/upload/uploadOurStoryMid
 
 router.get("/", OurStoryController.getOurStory);
 router.put("/", authMiddleware, OurStoryController.updateOrder);
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadOurStoryMiddleware,
+  OurStoryController.updateOurStoryItem
+);
 router.post(
   "/",
   authMiddleware,
