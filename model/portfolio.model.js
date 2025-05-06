@@ -45,6 +45,11 @@ const deleteProtfolioById = async (id) => {
       query: getSQLQuery([4001]),
       params: [id],
     });
+    const deleteLatestWork = await executeQuery({
+      query: getSQLQuery([4023]),
+      params: [id],
+    });
+    if (!deleteLatestWork?.data) throw deleteLatestWork;
     if (!result?.data) throw result;
     await fs.unlink(data.photo);
     return result;

@@ -42,6 +42,13 @@ const deleteBlogs = async (id) => {
     query: getSQLQuery([4009]),
     params: [id],
   });
+
+  const deleteLatestWork = await executeQuery({
+    query: getSQLQuery([4023]),
+    params: [id],
+  });
+  if (!deleteLatestWork?.data) throw deleteLatestWork;
+
   if (!result?.status) throw result;
   return result;
 };
