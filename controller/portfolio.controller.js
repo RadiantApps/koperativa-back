@@ -55,6 +55,7 @@ exports.updatePortfolio = async (req, res) => {
 
 exports.deletePortfolio = async (req, res) => {
   const { id } = req.params;
+
   try {
     const deleted = await portfolioModel.deleteProtfolioById(id);
     if (deleted) {
