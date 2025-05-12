@@ -29,7 +29,7 @@ exports.createPortfolioItem = async (req, res) => {
 
 exports.updatePortfolioContent = async (req, res) => {
   const { portfolioId, description, title, subtitle } = req.body;
-  const photo = req.file.path;
+  const photo = req.file?.path || null;
 
   try {
     const response = await portfolioItemModel.updatePortfolioItem(
