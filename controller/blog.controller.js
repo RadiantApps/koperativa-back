@@ -24,7 +24,7 @@ exports.getBlgById = async (req, res) => {
 
 exports.createBlogs = async (req, res) => {
   const { title } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
 
   const { errors, isValid } = validationBlog(req.body);
 
@@ -46,7 +46,7 @@ exports.createBlogs = async (req, res) => {
 exports.updateBlogs = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  const photo = req.file ? req.file.path : null;
+  const photo = req.file ? req.file.key : null;
 
   try {
     const createResponse = await BlogModel.updateBlogs(title, photo, id);

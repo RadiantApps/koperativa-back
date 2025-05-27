@@ -12,7 +12,7 @@ exports.getBanner = async (req, res) => {
 };
 
 exports.createCareerSlider = async (req, res) => {
-  const photo = req.file.path;
+  const photo = req.file.key;
 
   try {
     const response = await BannerModel.createCareerSlider(photo);

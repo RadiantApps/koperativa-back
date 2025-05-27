@@ -12,7 +12,7 @@ exports.getPortfolioItemById = async (req, res) => {
 
 exports.createPortfolioItem = async (req, res) => {
   const { portfolioId, description, title, subtitle } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const createPortfolioItem = await portfolioItemModel.createPortfolioItem(
       portfolioId,
@@ -29,7 +29,7 @@ exports.createPortfolioItem = async (req, res) => {
 
 exports.updatePortfolioContent = async (req, res) => {
   const { portfolioId, description, title, subtitle } = req.body;
-  const photo = req.file?.path || null;
+  const photo = req.file?.key || null;
 
   try {
     const response = await portfolioItemModel.updatePortfolioItem(
@@ -157,8 +157,8 @@ exports.createPortfolioContent = async (req, res) => {
     const fullImageIframeLink = req.body.iframeLink;
     // Handle file uploads
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { type, content } = req.body;
     const portfolioId = req.params.id;
@@ -214,8 +214,8 @@ exports.updatePortfolio = async (req, res) => {
     const fullImageIframeLink = req.body.iframeLink;
     // Handle file uploads
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { type, content } = req.body;
     const portfolioId = req.params.id;

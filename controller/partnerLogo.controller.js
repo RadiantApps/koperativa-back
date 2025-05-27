@@ -13,7 +13,7 @@ exports.getPartnerLogo = async (req, res) => {
 };
 
 exports.createPartnerLogo = async (req, res) => {
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const response = await PartnerLogoModel.createPartnerLogo(photo);
     return res.status(201).json({ message: "Logo u shtua me sukses" });

@@ -31,7 +31,7 @@ exports.getPortfolioDetails = async (req, res) => {
 
 exports.createPortfolio = async (req, res) => {
   const { title } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const createPortfolio = await portfolioModel.createPortfolio(title, photo);
     return res.status(201).json({ message: "Portfolio added succesfull" });
@@ -43,7 +43,7 @@ exports.createPortfolio = async (req, res) => {
 exports.updatePortfolio = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
-  const photo = req.file && req.file.path;
+  const photo = req.file && req.file.key;
   try {
     const update = await portfolioModel.updatePortfolio(id, title, photo);
     return res.status(201).json({ message: "Portfolio updated successfull" });

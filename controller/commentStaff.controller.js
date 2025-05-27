@@ -13,7 +13,7 @@ exports.getCommentStaff = async (req, res) => {
 
 exports.createCommentStaff = async (req, res) => {
   const { name, position, comment } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
 
   const { errors, isValid } = validationCommentStaff(req.body);
 

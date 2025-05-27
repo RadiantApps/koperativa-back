@@ -71,7 +71,7 @@ router.post("/send-email", upload.single("file"), async (req, res) => {
       attachments: [
         {
           filename: req.file.originalname,
-          path: req.file.path,
+          path: req.file.key,
         },
       ],
     };
