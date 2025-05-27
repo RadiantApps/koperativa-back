@@ -2,7 +2,7 @@ const PartnersModel = require("../model/partners.model");
 
 exports.createPartners = async (req, res) => {
   const { title } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const createPartners = await PartnersModel.createPartner(title, photo);
     return res.status(201).json({ message: "Partner added succesfull" });

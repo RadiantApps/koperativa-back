@@ -17,8 +17,8 @@ exports.createBlogDetailsContent = async (req, res) => {
     let imageUrl2 = null;
     const fullImageIframeLink = req.body.iframeLink;
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { type, content } = req.body;
     const portfolioId = req.params.id;
@@ -87,8 +87,8 @@ exports.updateBlogDetailsContent = async (req, res) => {
     const fullImageIframeLink = req.body.iframeLink;
 
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { type, content } = req.body;
     const blogId = req.params.id;

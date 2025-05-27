@@ -17,8 +17,8 @@ exports.createOurStory = async (req, res) => {
     const fullImageIframeLink = req.body.iframeLink;
 
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { type, content } = req.body;
     const firstLink = req.body.firstIframeLink;
@@ -98,8 +98,8 @@ exports.updateOurStoryItem = async (req, res) => {
     const fullImageIframeLink = req.body.iframeLink;
     // Handle file uploads
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
     const { id } = req.params;
     const { type, content } = req.body;

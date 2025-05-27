@@ -1,20 +1,46 @@
 const multer = require("multer");
-const fs = require("fs");
+const multerS3 = require("multer-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
+require("dotenv").config();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = "uploads/nextpost";
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
+const s3 = new S3Client({
+  region: process.env.SPACES_REGION,
+  endpoint: process.env.SPACES_ENDPOINT,
+  credentials: {
+    accessKeyId: process.env.SPACES_ACCESS_KEY,
+    secretAccessKey: process.env.SPACES_SECRET_KEY,
   },
 });
 
-const upload = multer({ storage: storage });
+const allowedTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/svg+xml",
+  "image/gif",
+  "video/mp4",
+];
+
+const fileFilter = (req, file, cb) => {
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error(`Invalid file type: ${file.originalname}`));
+  }
+};
+
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.SPACES_BUCKET,
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: (req, file, cb) => {
+      cb(null, `uploads/nextpost/${Date.now()}-${file.originalname}`);
+    },
+  }),
+  limits: { fileSize: 2 * 1024 * 1024 * 1024 }, // 10MB
+  fileFilter,
+});
 
 const uploadMiddlewareNextPost = (req, res, next) => {
   const uploadHandler = upload.fields([
@@ -29,19 +55,9 @@ const uploadMiddlewareNextPost = (req, res, next) => {
 
     const file = req.files?.file ? req.files.file[0] : null;
     const secondFile = req.files?.secondFile ? req.files.secondFile[0] : null;
-    const allowedTypes = [
-      "image/jpeg",
-      "image/png",
-      "image/svg+xml",
-      "image/gif",
-    ];
 
     const validateFile = (file) => {
       if (!file) return null;
-      if (!allowedTypes.includes(file.mimetype)) {
-        fs.unlinkSync(file.path);
-        return `Invalid file type: ${file.originalname}`;
-      }
 
       return null;
     };

@@ -21,8 +21,8 @@ exports.createNextPost = async (req, res) => {
     let imageUrl2 = null;
 
     if (req.files) {
-      imageUrl1 = req.files.file ? req.files.file[0].path : null;
-      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].path : null;
+      imageUrl1 = req.files.file ? req.files.file[0].key : null;
+      imageUrl2 = req.files.secondFile ? req.files.secondFile[0].key : null;
     }
 
     const contentData = { imageUrl: [{ imageUrl1 }, { imageUrl2 }] };

@@ -13,7 +13,7 @@ exports.getComment = async (req, res) => {
 
 exports.createComment = async (req, res) => {
   const { name, title, comment } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
 
   const { errors, isValid } = validationComment(req.body);
 
@@ -40,7 +40,7 @@ exports.createComment = async (req, res) => {
 
 exports.updateComment = async (req, res) => {
   const { name, title, comment } = req.body;
-  const photo = req.file ? req.file.path : null;
+  const photo = req.file ? req.file.key : null;
   const { id } = req.params;
 
   try {

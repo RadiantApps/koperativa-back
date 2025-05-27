@@ -13,7 +13,7 @@ exports.getTeams = async (req, res) => {
 
 exports.createTeams = async (req, res) => {
   const { name, surname, title, subtitle } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
 
   const { errors, isValid } = validationTeams(req.body);
 
@@ -60,7 +60,7 @@ exports.updateOrder = async (req, res) => {
 };
 exports.updateTeams = async (req, res) => {
   const { name, surname, title, subtitle } = req.body;
-  const photo = req.file ? req.file.path : null;
+  const photo = req.file ? req.file.key : null;
   const { id } = req.params;
 
   try {

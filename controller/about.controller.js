@@ -37,7 +37,7 @@ exports.editContent = async (req, res) => {
 };
 
 exports.createSlider = async (req, res) => {
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const response = await AboutModel.createSlider(photo);
     res.json({
@@ -72,7 +72,8 @@ exports.deleteSlider = async (req, res) => {
 };
 
 exports.addPhoto = async (req, res) => {
-  const photo = req.file.path;
+  console.log("req.file", req.file);
+  const photo = req.file.key;
   const { type } = req.body;
   try {
     const response = await AboutModel.addPhoto(photo, type);
@@ -86,7 +87,7 @@ exports.addPhoto = async (req, res) => {
 };
 
 exports.updatePhoto = async (req, res) => {
-  const photo = req.file.path;
+  const photo = req.file.key;
   const { id } = req.params;
 
   try {

@@ -46,7 +46,7 @@ exports.getBannerHome = async (req, res) => {
 };
 
 exports.createBannerHome = async (req, res) => {
-  const photo = req.file.path;
+  const photo = req.file.key;
   try {
     const response = await HomePage.createBannerHome(photo);
     return res.status(201).json({ message: "Banner Home created succesfull" });

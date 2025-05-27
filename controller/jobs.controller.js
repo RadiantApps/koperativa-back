@@ -24,7 +24,7 @@ exports.getJobsById = async (req, res) => {
 
 exports.createJobs = async (req, res) => {
   const { title, city, job_type, description } = req.body;
-  const photo = req.file.path;
+  const photo = req.file.key;
   const { errors, isValid } = validationJobs(req.body);
 
   if (!isValid) {
