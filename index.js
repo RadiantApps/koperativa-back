@@ -5,7 +5,7 @@ const passport = require("passport");
 const path = require("path");
 const { getDbConnection } = require("./config/database");
 
-// Load Route
+// Load Routes
 const UserRoute = require("./route/auth.route");
 const PortfolioRoute = require("./route/portfolio.route");
 const PortfolioItemRoute = require("./route/portfolioItem.route");
@@ -28,31 +28,39 @@ const categoryWork = require("./route/categorywork.js");
 const portfoliomapCategory = require("./route/portfolioMapCategory.route.js");
 const latestWorkRoute = require("./route/latestwork.route.js");
 const ourstoryRoute = require("./route/ourstory.route.js");
+
+// Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// CORS Setup
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = ["http://localhost:3000", "*"];
+      if (
+        !origin ||
+        allowedOrigins.includes("*") ||
+        allowedOrigins.includes(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
+// Passport Initialization
 app.use(passport.initialize());
-
 require("./config/passport");
-app.use(passport.initialize());
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Internal Server Error" });
-});
-
+// Static Files
 app.use(express.static(path.join(__dirname)));
 
+// API Routes
 app.use("/api/user", UserRoute);
 app.use("/api/portfolio", PortfolioRoute);
 app.use("/api/portfolioItem", PortfolioItemRoute);
@@ -76,11 +84,18 @@ app.use("/api/portfoliomapcategory", portfoliomapCategory);
 app.use("/api/latestWork", latestWorkRoute);
 app.use("/api/ourstory", ourstoryRoute);
 
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+});
+
+// Start Server
 const port = 5000;
 
 const checkDatabaseConnection = async () => {
   try {
-    const db = await getDbConnection();
+    await getDbConnection();
   } catch (error) {
     console.error("Database connection failed", error);
     process.exit(1);
@@ -88,6 +103,7 @@ const checkDatabaseConnection = async () => {
 };
 
 checkDatabaseConnection();
+
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
