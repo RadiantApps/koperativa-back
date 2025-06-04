@@ -13,8 +13,8 @@ router.get("/:id", async (req, res) => {
     id: postId,
     title: postDetails?.title,
     description: postDetails?.description,
-    image: `http://178.128.197.35/${postDetails?.photo}`,
-    url: `http://178.128.197.35/work/${postId}`,
+    image: `https://koperativa.com/${postDetails?.photo}`,
+    url: `https://koperativa.com/work/${postId}`,
   };
 
   res.send(`
