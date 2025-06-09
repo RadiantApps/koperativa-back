@@ -13,7 +13,7 @@ router.get("/:id", async (req, res) => {
     id: postId,
     title: postDetails?.title,
     description: postDetails?.description,
-    image: `https://koperativa.com/${postDetails?.photo}`,
+    image: `https://koperativa.fra1.cdn.digitaloceanspaces.com/${postDetails?.photo}`,
     url: `https://koperativa.com/work/${postId}`,
   };
 
