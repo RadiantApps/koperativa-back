@@ -7,6 +7,7 @@ const upload = multer({ dest: "uploads/cv" });
 
 router.get("/:id", async (req, res) => {
   const postId = req.params.id;
+
   const postDetails = await SharePostModel.getShareProduct(postId);
 
   const post = {
@@ -18,7 +19,7 @@ router.get("/:id", async (req, res) => {
   };
 
   res.send(`
- <!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -26,18 +27,29 @@ router.get("/:id", async (req, res) => {
         <meta property="og:title" content="${post.description}" />
         <meta property="og:description" content="${post.title}" />
         <meta property="og:image" content="${post.image}" />
-        <meta property="og:url" content="${post.url}" />
+        <meta property="og:url" content="https://koperativa.com/api/share/${postId}" />
         <meta name="twitter:card" content="summary_large_image">
         <title>${post.title}</title>
     </head>
     <body>
-        <h1>${post.title}</h1>
+        <div style="display: none;">
+        <h1 >${post.title}</h1>
         <p>${post.description}</p>
         <img src="${post.image}" alt="${post.title}" width="500"/>
+        <br>
+        </div>
+        <a style="display: none;" href="https://www.facebook.com/sharer/sharer.php?u=https://koperativa.com/api/share/${postId}" target="_blank">
+          Share on Facebook
+        </a>
+<script type="text/javascript">
+            // Redirect after rendering the details
+            window.location.href = "https://koperativa.com/work/${postId}";
+        </script>
     </body>
     </html>
   `);
 });
+
 router.post("/send-email", upload.single("file"), async (req, res) => {
   const { name, surname, email, phone, coverLetter } = req.body;
 
